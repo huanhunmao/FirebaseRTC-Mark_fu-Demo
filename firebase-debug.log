@@ -1,0 +1,30 @@
+[debug] [2022-08-18T04:45:26.861Z] ----------------------------------------------------------------------
+[debug] [2022-08-18T04:45:26.862Z] Command:       /usr/local/bin/node /usr/local/bin/firebase use --add
+[debug] [2022-08-18T04:45:26.863Z] CLI Version:   11.7.0
+[debug] [2022-08-18T04:45:26.863Z] Platform:      darwin
+[debug] [2022-08-18T04:45:26.863Z] Node Version:  v14.18.0
+[debug] [2022-08-18T04:45:26.863Z] Time:          Thu Aug 18 2022 12:45:26 GMT+0800 (中国标准时间)
+[debug] [2022-08-18T04:45:26.863Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-08-18T04:45:26.915Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-08-18T04:45:26.915Z] > authorizing via signed-in user (markfu1996@gmail.com)
+[debug] [2022-08-18T04:45:26.917Z] > refreshing access token with scopes: []
+[debug] [2022-08-18T04:45:26.918Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-08-18T04:45:26.918Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-18T04:46:41.942Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2022-08-18T04:46:42.299Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at invalidCredentialError (/usr/local/lib/node_modules/firebase-tools/lib/auth.js:144:12)
+    at refreshTokens (/usr/local/lib/node_modules/firebase-tools/lib/auth.js:508:15)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at async Client.getAccessToken (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:149:23)
+    at async Client.addAuthHeader (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:140:21)
+    at async Client.request (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:96:34)
+    at async getProjectPage (/usr/local/lib/node_modules/firebase-tools/lib/management/projects.js:238:17)
+    at async getFirebaseProjectPage (/usr/local/lib/node_modules/firebase-tools/lib/management/projects.js:255:23)
+    at async listFirebaseProjects (/usr/local/lib/node_modules/firebase-tools/lib/management/projects.js:286:29)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
