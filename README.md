@@ -1,6 +1,3 @@
-## Firebase + WebRTC 搭建聊天室
+## Firebase + WebRTC to do a online chat room
 
-## 马克付精品系列 
-
-
-## 感谢支持，star！！！
+## Thanks for your support，stars！！！

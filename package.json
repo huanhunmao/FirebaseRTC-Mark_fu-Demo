@@ -1,0 +1,25 @@
+{
+  "name": "FirebaseRTC-Demo",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {},
+  "keywords": [
+    "firebase",
+    "webRTC",
+    "video"
+  ],
+  "author": {
+    "name": "Mark_Fu",
+    "weChat": "getXiLan",
+    "url": "https://juejin.cn/user/1741228277763278"
+  },
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {},
+  "description": "To help you quickly create a new webRTC and understand webRTC quickly, this is a best practice for understanding webRTC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huanhunmao/FirebaseRTC-Mark_fu-Demo"
+  },
+  "homepage": "https://github.com/huanhunmao/Juejin_article_sync"
+}
