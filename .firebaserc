@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "fir-rtc-89b99",
-    "firebase-fhj-demo": "fir-rtc-deef1"
+    "testing": "fir-rtc-deef1"
   },
   "targets": {},
   "etags": {}

@@ -50,8 +50,14 @@ const roomWithOffer = {
 const roomRef = await db.collection('rooms').add(roomWithOffer);
 const roomId = roomRef.id;
 document.querySelector('#currentRoom').innerText = `Current room is ${roomId} - You are the caller!`
+  // Code for creating room above
+  
+  localStream.getTracks().forEach(track => {
+    peerConnection.addTrack(track, localStream);
+  });
 
-roomRef.onSnapshot(async snapshot => {
+
+  roomRef.onSnapshot(async snapshot => {
     console.log('Got updated room:', snapshot.data());
     const data = snapshot.data();
     if (!peerConnection.currentRemoteDescription && data.answer) {
@@ -60,50 +66,12 @@ roomRef.onSnapshot(async snapshot => {
         await peerConnection.setRemoteDescription(answer);
     }
 });
-
-await peerConnection.setRemoteDescription(offer);
-const answer = await peerConnection.createAnswer();
-await peerConnection.setLocalDescription(answer);
-
-const roomWithAnswer = {
-    answer: {
-        type: answer.type,
-        sdp: answer.sdp
-    }
-}
-await roomRef.update(roomWithAnswer);
-
-  // Code for creating room above
-  
-  localStream.getTracks().forEach(track => {
-    peerConnection.addTrack(track, localStream);
-  });
-
   // Code for creating a room below
 
   // Code for creating a room above
 
   // Code for collecting ICE candidates below
-  async function collectIceCandidates(roomRef, peerConnection,
-    localName, remoteName) {
-const candidatesCollection = roomRef.collection(localName);
 
-peerConnection.addEventListener('icecandidate', event => {
-if (event.candidate) {
-const json = event.candidate.toJSON();
-candidatesCollection.add(json);
-}
-});
-
-roomRef.collection(remoteName).onSnapshot(snapshot => {
-snapshot.docChanges().forEach(change => {
-if (change.type === "added") {
-const candidate = new RTCIceCandidate(change.doc.data());
-peerConneciton.addIceCandidate(candidate);
-}
-});
-})
-}
   // Code for collecting ICE candidates above
 
   peerConnection.addEventListener('track', event => {
@@ -134,6 +102,19 @@ function joinRoom() {
         document.querySelector(
             '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
         await joinRoomById(roomId);
+
+        const offer = roomSnapshot.data().offer;
+await peerConnection.setRemoteDescription(offer);
+const answer = await peerConnection.createAnswer();
+await peerConnection.setLocalDescription(answer);
+
+const roomWithAnswer = {
+    answer: {
+        type: answer.type,
+        sdp: answer.sdp
+    }
+}
+await roomRef.update(roomWithAnswer);
       }, {once: true});
   roomDialog.open();
 }
@@ -152,6 +133,26 @@ async function joinRoomById(roomId) {
       peerConnection.addTrack(track, localStream);
     });
 
+    async function collectIceCandidates(roomRef, peerConnection,
+        localName, remoteName) {
+const candidatesCollection = roomRef.collection(localName);
+
+peerConnection.addEventListener('icecandidate', event => {
+if (event.candidate) {
+const json = event.candidate.toJSON();
+candidatesCollection.add(json);
+}
+});
+
+roomRef.collection(remoteName).onSnapshot(snapshot => {
+snapshot.docChanges().forEach(change => {
+if (change.type === "added") {
+const candidate = new RTCIceCandidate(change.doc.data());
+peerConneciton.addIceCandidate(candidate);
+}
+});
+})
+}
     // Code for collecting ICE candidates below
 
     // Code for collecting ICE candidates above
